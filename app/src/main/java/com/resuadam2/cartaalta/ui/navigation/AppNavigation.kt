@@ -29,7 +29,9 @@ fun AppNavigation() {
         composable(
             AppScreens.GAME.name
         ) {
-            GameScreen {
+            GameScreen(
+                onBackToMenu = { navController.popBackStack() }
+            ) {
                 navController.navigate(AppScreens.GAME_OVER.name + "/${it}")
             }
         }
@@ -39,7 +41,7 @@ fun AppNavigation() {
             GameOverScreen(
                 ganador = it.arguments?.getString("ganador") ?: "Jugador 1",
                 onRestart = {
-                    navController.navigate(AppScreens.HOME.name)
+                    navController.popBackStack(AppScreens.HOME.name, false)
                 }
             )
         }
